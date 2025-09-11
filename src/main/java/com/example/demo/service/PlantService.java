@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,10 @@ public class PlantService {
         return converter.fromEntity(repository.findById(dto.getId()).orElse(null));
     }
 
+    public List<PlantDTO> readAll() {
+        return repository.findAll().stream().map(converter::fromEntity).toList();
+    }
+
     public PlantDTO update(PlantDTO dto) {
         return converter.fromEntity(repository.save(converter.fromDTO(dto)));
     }
@@ -35,7 +41,7 @@ public class PlantService {
         if (dto.getId() == null)
             return null;
         PlantEntity entity = repository.findById(dto.getId()).orElse(null);
-        if (entity == null) 
+        if (entity == null)
             return null;
         repository.delete(entity);
         return converter.fromEntity(entity);

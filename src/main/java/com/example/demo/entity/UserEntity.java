@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ozon_users")
+@Table(name = "users")
 public class UserEntity {
 
     @Id

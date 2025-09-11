@@ -1,5 +1,7 @@
 package com.example.demo.contoller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +33,8 @@ public class PlantController {
 
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping
-    public ResponseEntity<PlantDTO> readPlant(@RequestBody PlantDTO dto) {
-        PlantDTO result = service.read(dto);
+    public ResponseEntity<List<PlantDTO>> readPlant() {
+        List<PlantDTO> result = service.readAll();
         return new ResponseEntity<>(result, result != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
