@@ -16,8 +16,13 @@ public class PlantConverter {
     public PlantEntity fromDTO(PlantDTO dto) {
         if (dto == null || dto.getName() == null || dto.getLeafLength() == null)
             return null;
+            
+        PlantEntity plantEntity = new PlantEntity();
+        plantEntity.setId(dto.getId());
+        plantEntity.setName(dto.getName());
+        plantEntity.setLeafLength(dto.getLeafLength());
 
-        return new PlantEntity(dto.getId(), dto.getName(), dto.getLeafLength());
+        return plantEntity;
     }
 
     public PlantDTO fromEntity(PlantEntity entity) {

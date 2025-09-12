@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.Charset;
 import java.util.Date;
 import javax.crypto.SecretKey;
 
@@ -21,7 +22,7 @@ public class SecurityJwtTokenProvider {
 
     @PostConstruct
     public void init() {
-        this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
+        this.key = Keys.hmacShaKeyFor(secretKey.getBytes(Charset.defaultCharset()));
     }
 
     public String generateToken(Authentication authentication) {

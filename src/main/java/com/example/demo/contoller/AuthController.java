@@ -22,16 +22,16 @@ public class AuthController {
     @PostMapping("/sign")
     public ResponseEntity<TokenDTO> signUp(@RequestBody UserDTO dto) {
         String token = authService.signUser(dto.getLogin(), dto.getPassword());
-        return (token != null || token != "") ? new ResponseEntity<>(new TokenDTO(token), HttpStatus.CREATED)
-                : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return (token == null || token.isEmpty()) ? new ResponseEntity<>(HttpStatus.BAD_REQUEST)
+                : new ResponseEntity<>(new TokenDTO(token), HttpStatus.CREATED);
     }
 
     @PermitAll
     @PostMapping("/log")
     public ResponseEntity<TokenDTO> logIn(@RequestBody UserDTO dto) {
         String token = authService.logUser(dto.getLogin(), dto.getPassword());
-        return (token != null || token != "") ? new ResponseEntity<>(new TokenDTO(token), HttpStatus.OK)
-                : new ResponseEntity<>(new TokenDTO(""), HttpStatus.BAD_REQUEST);
+        return (token == null || token.isEmpty()) ? new ResponseEntity<>(HttpStatus.BAD_REQUEST)
+                : new ResponseEntity<>(new TokenDTO(token), HttpStatus.OK);
     }
 
 }

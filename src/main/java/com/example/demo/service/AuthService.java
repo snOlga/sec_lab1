@@ -28,7 +28,10 @@ public class AuthService {
             return "";
 
         String newPassword = passwordEncoder.encode(password);
-        UserEntity userEntity = new UserEntity(null, login, newPassword, "USER");
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLogin(login);
+        userEntity.setPassword(newPassword);
+        userEntity.setRole("USER");
 
         userRepository.save(userEntity);
 
