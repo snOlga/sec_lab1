@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.PlantDTO;
@@ -47,8 +48,8 @@ public class PlantController {
 
     @PreAuthorize("hasAuthority('USER')")
     @DeleteMapping
-    public ResponseEntity<PlantDTO> deletePlant(@RequestBody PlantDTO dto) {
-        PlantDTO result = service.delete(dto);
+    public ResponseEntity<PlantDTO> deletePlant(@RequestParam Long id) {
+        PlantDTO result = service.delete(new PlantDTO(id, null, null));
         return new ResponseEntity<>(result, result != null ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 }

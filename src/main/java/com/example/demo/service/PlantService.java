@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.owasp.html.PolicyFactory;
+import org.owasp.html.Sanitizers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,11 @@ public class PlantService {
     @Autowired
     private PlantConverter converter;
 
+    private static final PolicyFactory POLICY = Sanitizers.FORMATTING.and(Sanitizers.LINKS);
+
     public PlantDTO create(PlantDTO dto) {
         dto.setId(null);
+        dto.setName(POLICY.sanitize(dto.getName()));
         return converter.fromEntity(repository.save(converter.fromDTO(dto)));
     }
 
@@ -34,6 +39,7 @@ public class PlantService {
     }
 
     public PlantDTO update(PlantDTO dto) {
+        dto.setName(POLICY.sanitize(dto.getName()));
         return converter.fromEntity(repository.save(converter.fromDTO(dto)));
     }
 

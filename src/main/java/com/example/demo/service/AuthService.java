@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import org.owasp.html.PolicyFactory;
+import org.owasp.html.Sanitizers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,8 +25,14 @@ public class AuthService {
     @Autowired
     private UserRepository userRepository;
 
+    private static final PolicyFactory POLICY = Sanitizers.FORMATTING.and(Sanitizers.LINKS);
+
     public String signUser(String login, String password) {
         if (userExists(login))
+            return "";
+
+        String newLogin = POLICY.sanitize(login);
+        if(!newLogin.equals(login))
             return "";
 
         String newPassword = passwordEncoder.encode(password);
