@@ -135,7 +135,7 @@ private static final PolicyFactory POLICY = Sanitizers.FORMATTING.and(Sanitizers
 ...
 dto.setName(POLICY.sanitize(dto.getName()));
 ```
-**Аутентификация** - использование jwt токена, написан фильтр - [SecurityJwtTokenValidator](.\src\main\java\com\example\demo\security\SecurityJwtTokenValidator.java) - для проверки токена.
+**Аутентификация** - использование jwt токена, написан фильтр - [SecurityJwtTokenValidator](\src\main\java\com\example\demo\security\SecurityJwtTokenValidator.java) - для проверки токена.
 
 Защищённость endpoint'а определяется аннотацией `@PermitAll` или `@PreAuthorize`
 

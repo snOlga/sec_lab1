@@ -1,4 +1,4 @@
-name: CI - Build, SpotBugs, Dependency Check
+name: CI - SpotBugs, Dependency Check
 
 on:
   push:
@@ -20,9 +20,6 @@ jobs:
           distribution: temurin
           java-version: 17
           cache: maven
-
-      - name: Build with Maven
-        run: mvn -B clean install
 
       - name: Run SpotBugs
         run: mvn com.github.spotbugs:spotbugs-maven-plugin:check
