@@ -140,3 +140,15 @@ dto.setName(POLICY.sanitize(dto.getName()));
 Защищённость endpoint'а определяется аннотацией `@PermitAll` или `@PreAuthorize`
 
 Пароли хранятся в зашифрованном с помощью `BCryptPasswordEncoder` виде
+
+## Прохождение pipeline
+
+[Последний успешный запуск](https://github.com/snOlga/sec_lab1/actions/runs/17700271445/job/50305083559)
+
+Успешный SpotBugs:
+
+![spotbugs](image.png)
+
+Успешный OWASP Dependency-check:
+
+![owasp](image-1.png)
